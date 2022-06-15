@@ -125,7 +125,7 @@ th {
   margin-top: 100px;
 }
 
-.carousel-televisi #promo-t1 {
+.carousel-apotek #promo-t1 {
   margin-top: 65px;
   font-size: 40px;
   color: #212121;
@@ -133,13 +133,13 @@ th {
   /* letter-spacing: px; */
 }
 
-.carousel-televisi #promo-t2 {
+.carousel-apotek #promo-t2 {
   color: #212121;
   font-weight: 500;
   margin-bottom: 50px;
 }
 
-.carousel-televisi img {
+.carousel-apotek img {
   /* width: 50vw; */
   height: 77.5vh;
   object-fit: cover;
