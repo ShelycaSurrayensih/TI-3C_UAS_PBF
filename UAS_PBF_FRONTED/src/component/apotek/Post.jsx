@@ -5,7 +5,7 @@ const Post = (brg) => {
   
       <div className="apotek">
         <div className="konten-apotek">
-          {/* <p id="id-brg">ID : {brg.id}</p> */}
+          <p id="id-brg">ID : {brg.id}</p>
           <div className="gambar-apotek">
             <img src={brg.gambar} width="150" height="150" alt="" />
           </div>
@@ -15,11 +15,22 @@ const Post = (brg) => {
             <p>Stok : {brg.stok} </p>
             <p id="harga-brg">Rp. {brg.harga}</p>
           </div>
-          <button className="btn btn-sm" 
-            onClick={() => { if (window.confirm("Apakah anda yakin menghapus produk ini ?")) 
-            brg.hapusApotek(brg.id) }}>
-            Hapus
-          </button>
+          <button className="btn btn-sm" onClick={() => {
+            if (brg.users) {
+              // brg.tambahApotek.bind(this, brg.id) 
+              if(brg.stok > 0){
+                brg.tambahApotek(brg.id);
+                alert("Berhasil ditambahkan")
+              } else {
+                alert("Stok Habis");
+              }
+              // window.location.reload();
+            } else {
+              window.confirm("Silahkan Login Terlebih dahulu")
+            }
+          }
+          }>Beli</button>
+          {console.log(brg.users)}
         </div>
       </div>
   

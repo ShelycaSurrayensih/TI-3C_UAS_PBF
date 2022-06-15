@@ -16,7 +16,7 @@ import { connect } from 'react-redux'
 import Login from './component/login/Login'
 import Keranjang from './component/keranjang/Keranjang'
 import SignUp from './component/login/Signup'
-// import BlogPost from "./component/admin/BlogPost.jsx"
+import Apotek from './component/apotek/Apotek'
 import firebase from 'firebase'
 import firebaseConfig from './config'
 import ExampleCRUD from './component/login/ExampleCRUD'
@@ -109,6 +109,9 @@ class App extends Component {
               <Link to="/about" ><span>About</span></Link>
             </li>
             <li>
+              <Link to="/list-product" ><span>List Produk</span></Link>
+            </li>
+            <li>
               <Link to="/" ><span>Home</span></Link>
             </li>
           </ul>
@@ -116,6 +119,9 @@ class App extends Component {
           <Switch>
             <Route exact path="/">
               <Home />
+            </Route>
+            <Route path="/list-product">
+              <Products />
             </Route>
             <Route path="/keranjang">
               <Keranjangs />
@@ -148,6 +154,43 @@ class App extends Component {
 function Home() {
   return (
     <div className="carousel-apotek">
+      <Carousel showStatus={false} showIndicators={true} showThumbs={false} infiniteLoop={true} autoPlay={true}>
+        <div>
+          <img src="https://png.pngtree.com/template/20220421/ourmid/pngtree-online-medicine-horizontal-banner-composition-with-slider-more-button-editable-text-image_1115085.jpg" alt="gambar" />
+          {/* <p className="legend">Macbook Pro 2020</p> */}
+        </div>
+        <div>
+          <img src="http://adapotek.com/themes/farmacy/img/logo/slider3.jpg" alt="gambar" />
+          {/* <p className="legend">Macbook Pro 2019</p> */}
+        </div>
+        <div>
+          <img src="http://assets.kompasiana.com/items/album/2018/08/01/thumb-1528485442-5b61deb5bde575558357d802.jpg" alt="gambar" />
+          {/* <p className="legend">Macbook Pro 2018</p> */}
+        </div>
+      </Carousel>
+      <center><p id="promo-t1">PROMO TERBARU</p></center>
+      <center><p id="promo-t2">Dapatkan info promo terbaru disini</p></center>
+
+      <div className="promo-content">
+        <div className="column">
+          <div className="img-promo">
+            <img src="https://www.k24klik.com/blog/wp-content/uploads/2017/10/Newsletter-HUT-K24.jpg" alt="gambar" />
+          </div>
+          <center><p className="nama-promo">Kode Promo : 15HUTAPOTEK</p></center>
+        </div>
+        <div className="column">
+          <div className="img-promo">
+            <img src="https://pbs.twimg.com/media/Emm364MXIAMbbuN.jpg:large" alt="gambar" />
+          </div>
+          <center><p className="nama-promo">Kode Promo : ROYALTY FREE</p></center>
+        </div>
+        <div className="column">
+          <div className="img-promo">
+            <img src="https://nos.jkt-1.neo.id/serverless-image-op-0/3b9a8ddb91209dd4c8072136edc66103" alt="gambar" />
+          </div>
+          <center><p className="nama-promo">Kode Promo : MATA SEHAT</p></center>
+        </div>
+      </div>
     </div>
   );
 }
@@ -172,6 +215,14 @@ const About = () => {
       <div id="kotak" /> */}
     </div>
   );
+}
+
+function Products() {
+  return (
+    <div>
+      <Apotek />
+    </div>
+  )
 }
 
 function Keranjangs() {

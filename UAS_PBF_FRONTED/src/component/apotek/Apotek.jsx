@@ -8,10 +8,33 @@ class Apotek extends Component {
 
     constructor(props) {
       super(props);
+
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      } else {
+        firebase.app(); // if already initialized, use that one
+      }
+
       this.state = {
         listApotek: []
       }
   
+    }
+
+    authListener() {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          this.setState({
+            user
+          })
+          console.log("User adalah : " + user.email)
+        }
+        else {
+          this.setState({
+            user: null
+          })
+        }
+      })
     }
   
     ambilDataDariServerAPI = () => {
@@ -43,99 +66,54 @@ class Apotek extends Component {
   
     componentDidMount() {
       this.ambilDataDariServerAPI();
+      this.authListener();
+      console.log(this.state)
     }
 
     componentDidUpdate(prevProps, prevState) {
-      if (prevState !== this.state) {
-        console.log(this.state);
-      }
+      console.log(this.state);
     }
 
-    handleHapusApotek = (id) => {
-      const { listApotek } = this.state;
-      const newState = listApotek.filter(data => {
-          return data.id !== id;
-      })
-      this.setState({
-          ...this.state,
-          listApotek: newState
-      })
+    getDatabyId = userId => {
+      const Ref = firebase.database().ref('apotek/' + userId);
 
-      firebase.database().ref("apotek/" + id).remove();
+      Ref.on('value', (snapshot) => {
+        const data = snapshot.val();
+        this.writeData(data.id, data.nama, data.harga, data.gambar, data.stok);
+        console.log(data);
+      })
     }
 
-    handleTombolSimpan = () => {            // fungsi untuk meng-handle tombol simpan
-      let id = this.refs.id.value;
-      let nama = this.refs.nama.value; // this.refs mengacu pada input field (input text, textarea, dll)
-      let harga = this.refs.harga.value;
-      let gambar = this.refs.gambar.value;   
-      let stok = this.refs.stok.value;   
+    writeData = (userId, name, price, imageUrl, stock) => {
+  
+      var counter=0;
+      // var counter2;
+      let uid = this.state.user.uid;
+  
+      const userRef = firebase.database().ref('keranjang/'+uid+"/"+userId);
+      userRef.on('value', function(snapshot) {
+          if (snapshot.exists()) {
+              const data = snapshot.val();
+              counter = data.qty;
+              console.log("qty:"+counter);
+              // alert(counter);
+          }
+      })
 
-      if (id && nama && harga && gambar && stok) { //cek apakah seua data memiliki nilai (tidak null)
-          const {listApotek} = this.state;
-          const indeksApotek = listApotek.findIndex(data => {
-              return data.id === id;
-          });
-          listApotek[indeksApotek].nama = nama;
-          listApotek[indeksApotek].harga = harga;
-          listApotek[indeksApotek].stok = stok;
-          listApotek[indeksApotek].gambar = gambar;
-          this.setState({listApotek});          
-      } else if (nama && harga && stok && gambar) { // jika data belum ada di server
-          const id = new Date().getTime().toString();
-          const { listApotek } = this.state;
-          listApotek.push({id, nama, harga, gambar, stok});
-          this.setState({ listApotek });   
-          
-          firebase.database().ref("apotek/" + id)
-            .set({
-                id: id,
-                nama: nama,
-                harga: harga,
-                gambar: gambar,
-                stok: stok
-            });
-      }
-
-      this.refs.nama.value = "";
-      this.refs.harga.value = "";
-      this.refs.stok.value = "";
-      this.refs.gambar.value = "";
-      this.refs.id.value ="";
-    };
+      firebase.database().ref('keranjang/' + uid +"/"+ userId).set({
+        id: userId,
+        nama: name,
+        harga: price,
+        gambar: imageUrl,
+        stok: stock,
+        qty: counter + 1
+      });
+    }
   
     render() {
       return (
         <div className="post-apotek">
           <center><h2>Daftar Barang</h2></center>
-          <div className="form pb-2 border-bottom">
-            <div className="form-group row">
-                <label className="col-sm-3 col-form-label">Nama Produk</label>
-                <div className="col-sm-7">
-                    <input type="text" className="form-control" id="nama" name="nama" ref="nama"/>
-                </div>
-            </div>
-            <div className="form-group row">
-                <label className="col-sm-3 col-form-label">Harga</label>
-                <div className="col-sm-7">
-                <input type="text" className="form-control" id="harga" name="harga" ref="harga"/>
-                </div>
-            </div>
-            <div className="form-group row">
-                <label className="col-sm-3 col-form-label">Stok</label>
-                <div className="col-sm-7">
-                <input type="number" className="form-control" id="stok" name="stok" ref="stok"/>
-                </div>
-            </div>
-            <div className="form-group row">
-                <label className="col-sm-3 col-form-label">Link Gambar</label>
-                <div className="col-sm-7">
-                <input type="text" className="form-control" id="gambar" name="gambar" ref="gambar"/>
-                </div>
-            </div>
-            <input type="hidden" name="id" ref="id"/>
-            <button type="submit" className="btn btn-primary" onClick={this.handleTombolSimpan} >Simpan</button>
-          </div>
           <div className="tgh">
             {
               this.state.listApotek.map(apotek => {
@@ -147,8 +125,8 @@ class Apotek extends Component {
                     harga={apotek.harga}
                     gambar={apotek.gambar}
                     stok={apotek.stok}
-                    hapusApotek = {this.handleHapusApotek}
-                    />
+                    tambahApotek={this.getDatabyId}
+                    users={this.state.user ? this.state.user.email : null} />
                 )
               })
             }
