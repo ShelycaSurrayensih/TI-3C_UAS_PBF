@@ -16,7 +16,6 @@ import { connect } from 'react-redux'
 import Login from './component/login/Login'
 import Apotek from './component/apotek/Apotek'
 import SignUp from './component/login/Signup'
-// import BlogPost from "./component/admin/BlogPost.jsx"
 import firebase from 'firebase'
 import firebaseConfig from './config'
 import ExampleCRUD from './component/login/ExampleCRUD'
@@ -100,7 +99,7 @@ class App extends Component {
           <ul className="menu">
             <img src="https://www.k24klik.com/blog/wp-content/uploads/2018/03/Logo-k24klik-hijau-tulisan-new-01-01.png" alt="Gambar" />
             <li>
-              <Link to="/login" ><i className="fa fa-user-circle"></i></Link>
+              <Link to="/" ><i className="fa fa-user-circle"></i></Link>
             </li>
             <li>
               <Link to="/about" ><span>About</span></Link>
@@ -109,12 +108,12 @@ class App extends Component {
               <Link to="/list-product" ><span>List Produk</span></Link>
             </li>
             <li>
-              <Link to="/" ><span>Home</span></Link>
+              <Link to="/home" ><span>Home</span></Link>
             </li>
           </ul>
   
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/home">
               <Home />
             </Route>
             <Route path="/list-product">
@@ -123,7 +122,7 @@ class App extends Component {
             <Route path="/about">
               <About />
             </Route>
-            <Route path="/login">
+            <Route path="/">
               <Login />
             </Route>
             <Route path="/signup">
@@ -163,27 +162,27 @@ function Home() {
           {/* <p className="legend">Macbook Pro 2018</p> */}
         </div>
       </Carousel>
-      <center><p id="promo-t1">PROMO TERBARU</p></center>
-      <center><p id="promo-t2">Dapatkan info promo terbaru disini</p></center>
+      <center><p id="promo-t1">WELCOME TO ADMIN'S WEBSITE</p></center>
+      <center><p id="promo-t2">Apotek K24 Klik</p></center>
 
       <div className="promo-content">
         <div className="column">
           <div className="img-promo">
-            <img src="https://www.k24klik.com/blog/wp-content/uploads/2017/10/Newsletter-HUT-K24.jpg" alt="gambar" />
-          </div>
-          <center><p className="nama-promo">Kode Promo : 15HUTAPOTEK</p></center>
+            <img src="https://www.k24klik.com/blog/wp-content/uploads/2017/09/edit2.jpg" alt="gambar" />
+          </div><br></br>
+          <center><p className="nama-promo">Penghargaan Kami</p></center>
         </div>
         <div className="column">
           <div className="img-promo">
-            <img src="https://pbs.twimg.com/media/Emm364MXIAMbbuN.jpg:large" alt="gambar" />
-          </div>
-          <center><p className="nama-promo">Kode Promo : ROYALTY FREE</p></center>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIcVJ2ESEEpOr7ilALf7-Y_xxTiUNlN2A-eg&usqp=CAU" alt="gambar" />
+          </div><br></br>
+          <center><p className="nama-promo">Kerja Sama Bank BNI</p></center>
         </div>
         <div className="column">
           <div className="img-promo">
-            <img src="https://nos.jkt-1.neo.id/serverless-image-op-0/3b9a8ddb91209dd4c8072136edc66103" alt="gambar" />
-          </div>
-          <center><p className="nama-promo">Kode Promo : MATA SEHAT</p></center>
+            <img src="https://images.bisnis-cdn.com/thumb/posts/2021/08/02/1425018/apotek-k24.jpg?w=600&h=400" alt="gambar" />
+          </div><br></br>
+          <center><p className="nama-promo">Banyak Cabang Toko</p></center>
         </div>
       </div>
     </div>

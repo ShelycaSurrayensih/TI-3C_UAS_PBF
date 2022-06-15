@@ -139,6 +139,7 @@ class Login extends Component {
       <Welcome logout={this.logout} userEmail={this.state.user.email} />
     ) : (
       <div className="form">
+        <br></br><br></br>
         <div className="login">
           <center><p id="login-title">Masuk ke Apotek<br /> Account Anda</p></center>
           <form>
