@@ -18,7 +18,7 @@ const PostKeranjang = (brg) => {
       </td>
       <td align="center">{brg.harga * brg.qty}</td>
       <td align="center">
-        <button style={{marginRight:"10px"}} className="btn-hapus-keranjang" onClick={() => { if (window.confirm("Apakah anda yakin mengupdate produk ini ?")) brg.updateApotek(brg.id, brg.nama, brg.harga, brg.gambar, brg.stok, count) }}>Update</button>
+        <button style={{marginRight:"10px"}} className="btn-hapus-keranjang" onClick={() => { if (window.confirm("Apakah anda yakin mengupdate produk ini ?")) window.location.reload(brg.updateApotek(brg.id, brg.nama, brg.harga, brg.gambar, brg.stok, count)) }}>Update</button>
         <button className="btn-hapus-keranjang" onClick={() => { if (window.confirm("Apakah anda yakin menghapus produk ini ?")) brg.hapusApotek(brg.id) }}>Hapus</button>
       </td>
     </tr>
