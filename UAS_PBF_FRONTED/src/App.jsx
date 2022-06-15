@@ -197,22 +197,38 @@ function Home() {
 
 const About = () => {
   return (
-    <div className="About">
+    <div className="promo-content">
       {/* <center><h2>Biodata</h2></center> */}
-      <br></br>
-        <img src={foto}  width="250" height="300"/>
-         <p>
-       </p>
-    <p>
-  </p>
       <div id="bio">
-        <p id="p-4">K24Klik.com, Aplikasi Beli Obat Online Paling Komplit - Obat Asli Kapanpun!</p>
-        <p id="p-4">K24Klik.com yang memiliki slogan “Asli, Komplit, Cepat” hadir sebagai Apotek Online pertama di Indonesia yang "benar-benar" buka 24 Jam non Stop dan terlengkap di Indonesia. Hal ini memudahkan masyarakat Indonesia mendapatkan obat kapan saja, di mana saja dengan cepat. Obat diantar oleh Apotek terdekat ke lokasi pasien. Ya, secara otomatis sistem menentukan Apotek terdekat untuk mengantar obat ke rumah/kantor/lokasi pasien.</p>
+        <p id="p-2">K24Klik.com</p>
+        <hr />
+        <p id="p-3">Aplikasi Beli Obat Online Paling Komplit - Obat Asli Kapanpun!</p>
+        <hr />
+        <p id="p-5">K24Klik.com yang memiliki slogan “Asli, Komplit, Cepat” hadir sebagai Apotek Online pertama di Indonesia yang "benar-benar" buka 24 Jam non Stop dan terlengkap di Indonesia. Hal ini memudahkan masyarakat Indonesia mendapatkan obat kapan saja, di mana saja dengan cepat. Obat diantar oleh Apotek terdekat ke lokasi pasien. Ya, secara otomatis sistem menentukan Apotek terdekat untuk mengantar obat ke rumah/kantor/lokasi pasien.</p>
+        <hr />
         <p id="p-5">Selain KOMPLIT ragam obatnya, K24Klik menjamin semua produk yang dibeli pada situs K24Klik adalah 100% ASLI. Pesanan pun langsung dapat dikirim dengan CEPAT karena dilayani oleh Apotek Mitra K24Klik dan Apotek K-24 terdekat dengan alamat tujuan.</p>
+        <hr />
+        <ul className="menu center">
+            <li>
+              <a href='https://www.instagram.com/k24klik.id/' target="_blank"><i className="fa fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href='https://www.facebook.com/k24klik' target="_blank"><i className="fa fa-facebook-square"></i></a>
+            </li>
+            <li>
+              <a href='https://twitter.com/k24klik' target="_blank"><i className="fa fa-twitter-square"></i></a>
+            </li>
+            <li>
+              <a href='customercare@k24klik.com' target="_blank"><i className="fa fa-envelope"></i></a>
+            </li>
+            <li>
+              <br></br>
+              <p id='p-4'><b>For More Information</b></p>
+            </li>
+        </ul>
       </div>
-     
-      {/* <img src={foto} alt="gambar" />
-      <div id="kotak" /> */}
+      <img src={foto} alt="gambar" />
+      <div id="kotak" />
     </div>
   );
 }
