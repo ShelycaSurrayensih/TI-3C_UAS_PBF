@@ -102,8 +102,9 @@ class Keranjang extends Component {
     }
 
     handleUpdateApotek = (idProduk, name, price, imageUrl, stock, counter) => {
-
-        firebase.database().ref("keranjang/" + this.state.user.uid + "/" + idProduk)
+        
+        if (counter<=stock){
+            firebase.database().ref("keranjang/" + this.state.user.uid + "/" + idProduk)
             .set({
                 id: idProduk,
                 nama: name,
@@ -112,6 +113,9 @@ class Keranjang extends Component {
                 stok: stock,
                 qty: counter 
             });
+        } else {
+            return window.alert('Permintaan melebihi stok, harap ulangi kembali!!')
+        }
     }
 
     render() {
